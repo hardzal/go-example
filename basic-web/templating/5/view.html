@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Learning html/template Actions</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            {{/* example how to use actions */}}
+            <td>{{"Name"}}</td>
+            <td>:</td>
+            <td>{{.Name}}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>:</td>
+            {{$gender := .Gender}}
+            <td style="text-transform: capitalize;">
+                {{$gender}}
+            </td>
+        </tr>
+        <tr>
+            <td>Hobbies</td>
+            <td>:</td>
+            <td>
+                {{range $index, $elem := .Hobbies}}
+                {{$elem}},
+                {{end}}
+            </td>
+        </tr>
+        <tr>
+            <td>Affliation</td>
+            <td>:</td>
+            <td>{{.Info.Affliation}} ({{.Info.GetAffliationDetailInfo}})</td>
+        </tr>
+        {{with .Info}}
+        <tr>
+            <td>Address</td>
+            <td>:</td>
+            <td>{{.Address}}</td>
+        </tr>
+        {{end}}
+        {{if eq .Name "Bruce Wayne"}}
+        <tr>
+            <td colspan="2" style="font-weight: bold;">
+                I'm the Batman
+            </td>
+        </tr> {{ /* eq ne lt le gt ge */ }}
+        {{end}}
+    </table>
+</body>
+
+</html>
