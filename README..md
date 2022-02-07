@@ -2,3 +2,28 @@
 
 - Basic Golang
 - Basic Web
+  - Authenctication (OAuth, JWT)
+- Web Framework + Routers
+  - Echo
+  - Fiber
+  - Gin
+- ORMS
+  - GORM
+- Databases
+  - Relational (MySQL, PostgreSQL)
+  - NoSql (Redis, MongoDB)
+  - Search Engine (Elastic Search)  
+  - Cloud Database (Amazon DynamoDB, Azure CosmoDB)
+- Caching
+- Logging
+- Real-Time Communication
+- API Clients
+  - REST
+  - GraphQL
+- Unit Testing
+- Microservices
+  - Message Brokers
+    - RabbitMQ
+    - ApacheKafka
+- RPC
+- Go-patterns
