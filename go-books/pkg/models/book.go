@@ -1,15 +1,13 @@
 package models
 
 import (
-	"github.com/hardzal/go-example/go-books/config"
+	"github.com/hardzal/go-example/go-books/pkg/config"
 	"github.com/jinzhu/gorm"
 )
 
-var db *gorm.DB
-
 type Book struct {
 	gorm.Model
-	Name        string `gorm:""json:"name"`
+	Name        string `json:"name"`
 	Author      string `json:"author"`
 	Publication string `json:"publication"`
 }
@@ -40,6 +38,6 @@ func GetBookById(Id int64) (*Book, *gorm.DB) {
 
 func DeleteBook(ID int64) Book {
 	var book Book
-	db.Where("ID = ? ", ID).DELETE(book)
+	db.Where("ID = ? ", ID).Delete(book)
 	return book
 }

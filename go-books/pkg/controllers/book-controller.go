@@ -7,8 +7,8 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/hardzal/go-example/go-books/models"
-	"github.com/hardzal/go-example/go-books/utils"
+	"github.com/hardzal/go-example/go-books/pkg/models"
+	"github.com/hardzal/go-example/go-books/pkg/utils"
 )
 
 var NewBook models.Book
@@ -21,7 +21,7 @@ func GetBook(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
-func GetBookId(w http.ResponseWriter, r *http.Request) {
+func GetBookById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId := vars["bookId"]
 	ID, err := strconv.ParseInt(bookId, 0, 0)
@@ -53,7 +53,7 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("error while parsing")
 	}
 
-	book := models.DeletBook(ID)
+	book := models.DeleteBook(ID)
 	res, _ := json.Marshal(book)
 	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -71,7 +71,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("error while parsing")
 	}
 
-	bookDetails, db := models.GetBookId(ID)
+	bookDetails, db := models.GetBookById(ID)
 	if updateBook.Name != "" {
 		bookDetails.Name = updateBook.Name
 	}

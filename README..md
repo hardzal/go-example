@@ -6,22 +6,34 @@
   - Authenctication (OAuth, JWT)
 
 - [ ] Web Framework + Routers
-  - Echo
-  - Fiber
-  - Gin
+  - [ ] Echo
+  - [ ] Fiber
+  - [ ] Gin
+  - [ ] Mux
+
+- [ ] API Clients
+  - REST
+  - GraphQL
+  - SOAP
+  - RESTFUL
+  - GraphQL
+  - gRPC
+  - Websocket
+  - Webhook
+
 - [ ] ORMS
   - GORM
+
 - [ ] Databases
   - Relational (MySQL, PostgreSQL)
   - NoSql (Redis, MongoDB)
   - Search Engine (Elastic Search)
   - Cloud Database (Amazon DynamoDB, Azure CosmoDB)
+
 - [ ] Caching
 - [ ] Logging
 - [ ] Real-Time Communication
-- [ ] API Clients
-  - REST
-  - GraphQL
+
 - [ ] Unit Testing
 - [ ] Microservices
   - Message Brokers
@@ -30,9 +42,3 @@
 - [ ] RPC
 - [ ] Go-patterns
 
-- SOAP
-- RESTFUL
-- GraphQL
-- gRPC
-- Websocket
-- Webhook
