@@ -3,7 +3,7 @@ package authcontrollers
 import (
 	"time"
 
-	"github.com/golang-jwt/jwt/v5"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/hardzal/go-example/go-books/pkg/config"
 	"github.com/hardzal/go-example/go-books/pkg/models"
 	"github.com/hardzal/go-example/go-books/pkg/utils"
@@ -113,5 +113,15 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func Logout(w http.ResponseWriter, r *http.Request) {
+	// menghapus token cookie
+	http.SetCookie(w, &http.Cookie{
+		Name:     "token",
+		Path:     "/",
+		Value:    "",
+		HttpOnly: true,
+		MaxAge:   -1,
+	})
 
+	response := map[string]string{"message": "Logout berhasil"}
+	utils.ResponseJSON(w, http.StatusOK, response)
 }
