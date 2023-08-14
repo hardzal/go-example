@@ -39,6 +39,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		default:
 			response := map[string]string{"message": err.Error()}
 			utils.ResponseJSON(w, http.StatusInternalServerError, response)
+			return
 		}
 	}
 
