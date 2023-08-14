@@ -12,8 +12,11 @@ import (
 
 func main() {
 	r := mux.NewRouter()
+
 	routes.RegisterBooksStoreRoutes(r)
 	routes.UsersStoresRoutes(r)
+	routes.AuthRoutes(r)
+
 	http.Handle("/", r)
 	fmt.Println("Starting web server at port :8001")
 	log.Fatal(http.ListenAndServe("localhost:8001", r))
