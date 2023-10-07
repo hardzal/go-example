@@ -44,6 +44,7 @@ func main() {
 	fmt.Println(data)
 
 	testProducts := &pb.Products{}
+
 	if err = proto.Unmarshal(data, testProducts); err != nil {
 		log.Fatal("Unmarshal error: ", err)
 	}
