@@ -2,29 +2,27 @@
 
 - [x] Basic Golang
 
-* [ ] Basic Web
+* [X] Basic Web
   - Authenctication (OAuth, JWT)
 
-- [ ] Web Framework + Routers
-  - [ ] Echo
-  - [ ] Fiber
-  - [ ] Gin
-  - [ ] Mux
+- [x] Web Framework + Routers
+  - Echo
+  - Fiber
+  - Gin
+  - Mux
 
-- [ ] API Clients
+- [X] API Clients
   - REST
   - GraphQL
   - SOAP
-  - RESTFUL
-  - GraphQL
   - gRPC
   - Websocket
   - Webhook
 
-- [ ] ORMS
+- [X] ORMS
   - GORM
 
-- [ ] Databases
+- [X] Databases
   - Relational (MySQL, PostgreSQL)
   - NoSql (Redis, MongoDB)
   - Search Engine (Elastic Search)
@@ -36,9 +34,9 @@
 
 - [ ] Unit Testing
 - [ ] Microservices
-  - Message Brokers
-    - RabbitMQ
-    - ApacheKafka
+- [ ] Message Brokers
+  - RabbitMQ
+  - ApacheKafka
 - [ ] RPC
 - [ ] Go-patterns
 
