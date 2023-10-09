@@ -2,9 +2,10 @@ package services
 
 import (
 	"context"
-	"go-grpc/pb/pagination"
+	pagingPb "go-grpc/pb/pagination"
 	productPb "go-grpc/pb/product"
 	"log"
+	"math"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -18,44 +19,32 @@ type ProductService struct {
 
 func (p *ProductService) GetProducts(context.Context, *productPb.Empty) (*productPb.Products, error) {
 
-	// products :=
-	// 	&productPb.Products{
-	// 		Pagination: &pagingPb.Pagination{
-	// 			Total:       10,
-	// 			PerPage:     5,
-	// 			CurrentPage: 1,
-	// 			LastPage:    2,
-	// 		},
-	// 		Data: []*productPb.Product{
-	// 			{
-	// 				Id:    1,
-	// 				Name:  "Metallica T-shirt",
-	// 				Price: 1000000.0,
-	// 				Stock: 15,
-	// 				Category: &productPb.Category{
-	// 					Id:   1,
-	// 					Name: "Shirt",
-	// 				},
-	// 			},
-	// 			{
-	// 				Id:    1,
-	// 				Name:  "White T-shirt",
-	// 				Price: 500000.0,
-	// 				Stock: 30,
-	// 				Category: &productPb.Category{
-	// 					Id:   1,
-	// 					Name: "Shirt",
-	// 				},
-	// 			},
-	// 		},
-	// 	}
+	var page int64 = 1
+	var total int64
+	var limit int64 = 1
+	var offset int64
 
+	var pagination pagingPb.Pagination
 	var products []*productPb.Product
 
-	rows, err := p.DB.Table("products AS p").
+	sql := p.DB.Table("products AS p").
 		Joins("LEFT JOIN categories AS c ON c.id = p.category_id").
-		Select("p.id", "p.name", "p.price", "p.stock", "c.id as category_id", "c.name as category_name").
-		Rows()
+		Select("p.id", "p.name", "p.price", "p.stock", "c.id as category_id", "c.name as category_name")
+
+	sql.Count(&total)
+
+	if page == 1 {
+		offset = 0
+	} else {
+		offset = (page - 1) * limit
+	}
+
+	pagination.Total = uint64(total)
+	pagination.PerPage = uint32(limit)
+	pagination.CurrentPage = uint32(page)
+	pagination.LastPage = uint32(math.Ceil(float64(total) / float64(limit)))
+
+	rows, err := sql.Offset(int(offset)).Limit(int(limit)).Rows()
 
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
@@ -75,13 +64,8 @@ func (p *ProductService) GetProducts(context.Context, *productPb.Empty) (*produc
 	}
 
 	response := &productPb.Products{
-		Pagination: &pagination.Pagination{
-			Total:       2,
-			PerPage:     1,
-			CurrentPage: 1,
-			LastPage:    1,
-		},
-		Data: products,
+		Pagination: &pagination,
+		Data:       products,
 	}
 
 	return response, nil
